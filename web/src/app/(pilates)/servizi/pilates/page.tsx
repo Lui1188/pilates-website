@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client";
 
-const QUERY = `*[_type=="course" && category=="Chiropratica"]|order(order asc){
+const QUERY = `*[_type=="course" && category=="Pilates"]|order(order asc){
   _id,
   title,
   description,
@@ -10,14 +10,14 @@ const QUERY = `*[_type=="course" && category=="Chiropratica"]|order(order asc){
   subServices
 }`;
 
-export default async function ChiropraticaPage() {
+export default async function PilatesPage() {
   const services = await client.fetch(QUERY);
 
   return (
-    <main className="min-h-screen p-6">
-      <h1 className="text-3xl font-semibold">Chiropratica</h1>
+    <main className="bg-soft min-h-screen p-6">
+      <h1 className="text-3xl font-semibold">Pilates</h1>
       <p className="mt-2 max-w-2xl text-sm opacity-80">
-        Trattamenti e percorsi personalizzati.
+        Reformer e Matwork, percorsi personalizzati.
       </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -37,6 +37,22 @@ export default async function ChiropraticaPage() {
                   <li key={i}>{h}</li>
                 ))}
               </ul>
+            )}
+
+            {Array.isArray(s.subServices) && s.subServices.length > 0 && (
+              <div className="mt-6 space-y-3">
+                <div className="text-sm font-medium">Opzioni</div>
+                {s.subServices.map((ss: any, i: number) => (
+                  <div key={i} className="rounded-xl border p-3">
+                    <div className="font-medium">{ss.title}</div>
+                    {ss.description && <p className="mt-1 text-sm opacity-80">{ss.description}</p>}
+                    <div className="mt-2 flex flex-wrap gap-2 text-sm">
+                      {ss.duration && <span className="rounded-full border px-3 py-1">{ss.duration}</span>}
+                      {ss.price && <span className="rounded-full border px-3 py-1">{ss.price}</span>}
+                    </div>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         ))}

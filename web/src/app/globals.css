@@ -12,11 +12,107 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* -------------------------------------------------
+   Theming (base background + accent)
+   common  → salmon
+   chiro   → green
+   pilates → pink
+-------------------------------------------------- */
+
+.theme-common {
+  --bg: #F6DCDC;
+  /* --accent: #FFB7B7; */
+  --accent: #C88181;
+}
+
+.theme-chiro {
+  --bg: #CBFFE7;
+  /* --accent: #73EFB6; */
+  --accent: #0ea45e;
+}
+
+.theme-pilates {
+  --bg: #FFDCE9;
+  /* --accent: #FD7FAB; */
+  --accent: #CB1958;
+}
+
+/* Utilities */
+.bg-soft {
+  background-color: var(--bg);
+}
+
+.accent-border {
+  border-color: var(--accent);
+}
+
+.accent-strong-border {
+  border-color: color-mix(in srgb, var(--accent) 70%, black);
+}
+
+.accent-bg {
+  background-color: var(--accent);
+}
+
+.accent-strong-bg {
+  background-color: color-mix(in srgb, var(--accent) 70%, black);
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.accent-strong-text {
+  color: color-mix(in srgb, var(--accent) 70%, black);
+}
+
+.accent-light-text {
+  color: color-mix(in srgb, var(--accent) 15%, white);
+}
+
+/* Dark mode base */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+/* Focus  */
+.accent-ring {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Hover soft background (cards, links) */
+.bg-soft-hover {
+  transition: background-color 0.2s ease;
+}
+
+.bg-soft-hover:hover {
+  background-color: color-mix(in srgb, var(--bg) 80%, white);
+}
+
+/* Subtle divider */
+.accent-divider {
+  height: 1px;
+  background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* Soft badge background */
+.accent-soft {
+  background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+}
+
+/* Navbar background that matches page theme */
+.navbar-bg {
+  background-color: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.navbar-border {
+  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 body {
