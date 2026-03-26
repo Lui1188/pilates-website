@@ -6,48 +6,44 @@ import { useEffect, useState } from "react";
 type NavbarProps = {
   studioName?: string;
   logoUrl?: string | null;
-  bookingUrl?: string | null;
-  ctaText?: string | null;
 };
 
 function Hamburger({ open }: { open: boolean }) {
   return (
-    <span className="relative block h-4 w-6">
+    <span className="relative block h-5 w-6 text-[#8C5A5A]">
       <span
         className={[
-          "absolute left-0 top-0 h-0.5 w-6 rounded-full bg-current transition-transform duration-200",
-          open ? "translate-y-[7px] rotate-45" : "",
+          "absolute left-0 top-0 h-0.5 w-6 rounded-full bg-current transition-transform duration-300",
+          open ? "translate-y-[9px] rotate-45" : "",
         ].join(" ")}
       />
       <span
         className={[
-          "absolute left-0 top-[7px] h-0.5 w-6 rounded-full bg-current transition-opacity duration-200",
+          "absolute left-0 top-[9px] h-0.5 w-6 rounded-full bg-current transition-opacity duration-300",
           open ? "opacity-0" : "opacity-100",
         ].join(" ")}
       />
       <span
         className={[
-          "absolute left-0 top-[14px] h-0.5 w-6 rounded-full bg-current transition-transform duration-200",
-          open ? "-translate-y-[7px] -rotate-45" : "",
+          "absolute left-0 top-[18px] h-0.5 w-6 rounded-full bg-current transition-transform duration-300",
+          open ? "-translate-y-[9px] -rotate-45" : "",
         ].join(" ")}
       />
     </span>
   );
 }
 
-export default function Navbar({ studioName, logoUrl, bookingUrl, ctaText }: NavbarProps) {
+export default function Navbar({ studioName, logoUrl }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const brand = studioName || "Chirolates Studio";
 
-  // Close on ESC + lock scroll when open
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    window.addEventListener("keydown", onKeyDown);
 
-    if (open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
+    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = open ? "hidden" : "";
 
     return () => {
       window.removeEventListener("keydown", onKeyDown);
@@ -56,126 +52,84 @@ export default function Navbar({ studioName, logoUrl, bookingUrl, ctaText }: Nav
   }, [open]);
 
   const close = () => setOpen(false);
+  const toggleMenu = () => setOpen((prev) => !prev);
 
   return (
-    <header className="sticky top-0 z-50 border-b navbar-bg navbar-border">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        {/* Left: Logo + Name */}
-        <Link href="/" className="flex items-center gap-3" onClick={close}>
-          {logoUrl ? (
-            <img src={logoUrl} alt={brand} className="h-8 w-auto" />
-          ) : (
-            <div className="h-8 w-8 rounded-full accent-bg" />
-          )}
-          <span className="text-sm font-semibold tracking-wide accent-text">{brand}</span>
-        </Link>
+    <>
+      <header className="sticky top-0 z-50 bg-soft">
+        <div className="relative mx-auto flex max-w-6xl items-center justify-center px-6 py-3">
+          <Link href="/" onClick={close} className="flex items-center justify-center">
+            <img
+              src={logoUrl || "/logo.svg"}
+              alt={brand}
+              className="h-26 w-auto md:h-35"
+            />
+          </Link>
+        </div>
+      </header>
 
-        {/* Desktop */}
-        <nav className="hidden items-center gap-5 text-sm md:flex accent-strong-text font-semibold">
-          <Link href="/servizi/chiropratica" className="opacity-100 hover:opacity-80 transition">
+      {/* Hamburger always visible above everything */}
+      <button
+        type="button"
+        onClick={toggleMenu}
+        aria-expanded={open}
+        aria-controls="fullscreen-menu"
+        aria-label={open ? "Chiudi menu" : "Apri menu"}
+        className="fixed right-6 top-6 z-[100] flex h-12 w-12 items-center justify-center rounded-full text-current transition hover:opacity-70"
+      >
+        <Hamburger open={open} />
+      </button>
+
+      <div
+        id="fullscreen-menu"
+        aria-hidden={!open}
+        className={[
+          "fixed inset-0 z-[90] flex min-h-screen w-full flex-col justify-center bg-soft transition-all duration-300 text-[#8C5A5A]",
+          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+        ].join(" ")}
+      >
+        <nav className="flex flex-col items-center justify-center gap-6 px-6 text-center">
+          <Link
+            href="/"
+            onClick={close}
+            className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
+          >
+            Home
+          </Link>
+
+          <Link
+            href="/servizi/chiropratica"
+            onClick={close}
+            className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
+          >
             Chiropratica
           </Link>
-          <Link href="/servizi/pilates" className="opacity-100 hover:opacity-80 transition">
+
+          <Link
+            href="/servizi/pilates"
+            onClick={close}
+            className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
+          >
             Pilates
           </Link>
 
-          {bookingUrl ? (
-            <a
-              href={bookingUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-xl px-4 py-2 text-white accent-bg hover:opacity-90 transition focus:accent-ring"
-            >
-              {ctaText || "Prenota"}
-            </a>
-          ) : (
-            <button
-              type="button"
-              className="rounded-xl px-4 py-2 accent-strong-bg accent-light-text hover:opacity-90 transition focus:accent-ring"
-            >Prenota</button>
-          )}
-        </nav>
-
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          className="md:hidden rounded-xl border px-3 py-2 text-sm"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Chiudi menu" : "Apri menu"}
-        >
-          <Hamburger open={open} />
-        </button>
-      </div>
-
-      {/* Mobile overlay + panel */}
-      {open && (
-        <>
-          {/* Overlay */}
-          <button
-            aria-label="Chiudi menu"
-            className="fixed inset-0 z-40 bg-black/30"
+          <Link
+            href="/chi-sono"
             onClick={close}
-          />
-
-          {/* Panel */}
-          <div
-            id="mobile-menu"
-            className="fixed inset-x-0 top-[65px] z-50 border-b bg-white"
+            className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            <div className="mx-auto max-w-5xl px-6 py-4 space-y-2 text-sm">
-              <Link
-                href="/servizi/chiropratica"
-                className="block rounded-xl px-3 py-2 bg-soft-hover"
-                onClick={close}
-              >
-                Chiropratica
-              </Link>
+            Chi sono
+          </Link>
 
-              <Link
-                href="/servizi/pilates"
-                className="block rounded-xl px-3 py-2 bg-soft-hover"
-                onClick={close}
-              >
-                Pilates
-              </Link>
-
-              <Link
-                href="/chi-sono"
-                className="block rounded-xl px-3 py-2 bg-soft-hover"
-                onClick={close}
-              >
-                Chi sono
-              </Link>
-
-              <Link
-                href="/contatti"
-                className="block rounded-xl px-3 py-2 bg-soft-hover"
-                onClick={close}
-              >
-                Contatti
-              </Link>
-
-              {bookingUrl ? (
-                <a
-                  href={bookingUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-xl px-3 py-2 text-white accent-bg hover:opacity-90 transition"
-                  onClick={close}
-                >
-                  {ctaText || "Prenota"}
-                </a>
-              ) : (
-                <div className="block rounded-xl border px-3 py-2 opacity-70">
-                  (Imposta bookingUrl in Sanity)
-                </div>
-              )}
-            </div>
-          </div>
-        </>
-      )}
-    </header>
+          <Link
+            href="/contatti"
+            onClick={close}
+            className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
+          >
+            Contatti
+          </Link>
+        </nav>
+      </div>
+    </>
   );
 }

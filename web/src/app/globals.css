@@ -42,6 +42,12 @@
   background-color: var(--bg);
 }
 
+.bg-soft-gradient {
+  background: linear-gradient(to bottom,
+      var(--bg),
+      color-mix(in srgb, var(--bg) 75%, white));
+}
+
 .accent-border {
   border-color: var(--accent);
 }
@@ -107,8 +113,7 @@
 
 /* Navbar background that matches page theme */
 .navbar-bg {
-  background-color: color-mix(in srgb, var(--bg) 70%, transparent);
-  backdrop-filter: blur(8px);
+  background-color: var(--bg);
 }
 
 .navbar-border {

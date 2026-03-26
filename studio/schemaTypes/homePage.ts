@@ -5,39 +5,69 @@ export default defineType({
   title: "Home",
   type: "document",
   fields: [
-    defineField({ name: "heroTitle", title: "Titolo Hero", type: "string", validation: (r) => r.required() }),
-    defineField({ name: "heroSubtitle", title: "Sottotitolo Hero", type: "string" }),
-    defineField({ name: "introText", title: "Testo introduttivo (breve)", type: "text" }),
-
     defineField({
-      name: "studioVideoUrl",
-      title: "Video studio (URL YouTube/Vimeo)",
-      type: "url",
-      description: "Inserisci un link YouTube o Vimeo",
+      name: "heroMarqueeText",
+      title: "Testo scorrevole hero",
+      type: "string",
+      description: "Esempio: Pilates • Chiropratica • Benessere • Movimento",
     }),
 
     defineField({
-      name: "featuredServices",
-      title: "Servizi in evidenza",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "course" }] }],
-      description: "Seleziona 2–4 servizi da mostrare in Home",
-    }),
-
-    defineField({
-      name: "collaborations",
-      title: "Collaborazioni",
+      name: "heroImages",
+      title: "Immagini hero",
       type: "array",
       of: [
-        {
-          type: "object",
+        defineField({
+          name: "imageItem",
+          title: "Immagine",
+          type: "image",
+          options: { hotspot: true },
           fields: [
-            defineField({ name: "name", title: "Nome", type: "string" }),
-            defineField({ name: "logo", title: "Logo", type: "image", options: { hotspot: true } }),
-            defineField({ name: "url", title: "Link", type: "url" }),
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+            }),
           ],
-        },
+        }),
       ],
+      validation: (Rule) => Rule.required().min(3).max(5),
+      description: "Carica esattamente 3 immagini per la prima sezione",
+    }),
+
+    defineField({
+      name: "section2ScrollText",
+      title: "Testo grande scorrevole sezione 2",
+      type: "string",
+      description: 'Esempio: CHIROLATES.',
+    }),
+
+    defineField({
+      name: "section2Title",
+      title: "Titolo grande sezione 2",
+      type: "string",
+      description: 'Esempio: CHIROLATES',
+    }),
+
+    defineField({
+      name: "section2Subtitle",
+      title: "Sottotitolo sezione 2",
+      type: "string",
+      description: 'Esempio: IL BENESSERE PRENDE UNA NUOVA FORMA',
+    }),
+
+    defineField({
+      name: "section2ButtonText",
+      title: "Testo bottone sezione 2",
+      type: "string",
+      initialValue: "CHI SIAMO",
+    }),
+
+    defineField({
+      name: "section2ButtonLink",
+      title: "Link bottone sezione 2",
+      type: "string",
+      initialValue: "/about",
     }),
   ],
 });

@@ -2,82 +2,261 @@ import Link from "next/link";
 
 type FooterProps = {
   studioName?: string;
-  tagline?: string;
+  legalName?: string;
+  footerTagline?: string;
+  logoUrl?: string | null;
+
   phone?: string;
   whatsapp?: string;
-  address?: string;
-  bookingUrl?: string | null;
-  ctaText?: string | null;
+  email?: string;
+
+  addressName?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  mapsUrl?: string;
+
+  instagramUrl?: string;
+  facebookUrl?: string;
+
+  privacyUrl?: string;
+  cookieUrl?: string;
+
+  vatNumber?: string;
 };
+
+function InstagramIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="currentColor"
+    >
+      <path d="M13.5 21v-7h2.4l.4-2.8h-2.8V9.4c0-.8.2-1.4 1.4-1.4H16V5.5c-.2 0-.9-.1-1.8-.1-1.8 0-3.1 1.1-3.1 3.2v2.6H9v2.8h2.3v7h2.2Z" />
+    </svg>
+  );
+}
+
+function sanitizePhone(phone?: string) {
+  return phone?.replace(/\s+/g, "");
+}
+
+function sanitizeWhatsapp(whatsapp?: string) {
+  return whatsapp?.replace(/[^\d]/g, "");
+}
 
 export default function Footer({
   studioName,
-  tagline,
+  legalName,
+  footerTagline,
+  logoUrl,
   phone,
   whatsapp,
-  address,
-  bookingUrl,
-  ctaText,
+  email,
+  addressName,
+  addressLine1,
+  addressLine2,
+  mapsUrl,
+  instagramUrl,
+  facebookUrl,
+  privacyUrl,
+  cookieUrl,
+  vatNumber,
 }: FooterProps) {
+  const brand = studioName || "Chirolates";
+
+  const hasAddressBlock = addressName || addressLine1 || addressLine2;
+  const hasContactsBlock = phone || email || whatsapp;
+  const hasSocials = instagramUrl || facebookUrl;
+  const hasLegalLinks = privacyUrl || cookieUrl;
+
   return (
-    <footer className="mt-20 border-t navbar-bg">
-      <div className="mx-auto max-w-5xl px-6 py-12 grid gap-8 md:grid-cols-2">
-        {/* Brand */}
-        <div>
-          <div className="text-sm font-semibold accent-text">
-            {studioName || "Studio"}
+    <footer className="bg-soft text-[#8C5A5A]">
+      <div className="border-y border-black/10">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:px-8 md:py-20">
+          <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr_1.4fr] md:items-start md:gap-10 lg:gap-16">
+            {/* Left: Logo + tagline */}
+            <div className="flex flex-col items-start text-left">
+              <Link href="/" className="inline-flex justify-start">
+                {logoUrl ? (
+                  <img
+                    src={logoUrl}
+                    alt={brand}
+                    className="h-24 w-auto md:h-28 lg:h-32"
+                  />
+                ) : (
+                  <span className="text-2xl font-semibold tracking-wide">
+                    {brand}
+                  </span>
+                )}
+              </Link>
+
+              {footerTagline && (
+                <p className="mt-5 max-w-sm text-sm leading-7 text-[#8C5A5A]/85">
+                  {footerTagline}
+                </p>
+              )}
+            </div>
+
+            {/* Center: Social */}
+            <div className="flex flex-col items-start text-left md:items-center md:text-center">
+              {hasSocials && (
+                <>
+                  <h4 className="mb-4 text-base font-semibold">Seguici</h4>
+                  <div className="flex flex-col items-center gap-3">
+                    {instagramUrl && (
+                      <a
+                        href={instagramUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Instagram"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#8C5A5A]/25 transition hover:opacity-70"
+                      >
+                        <InstagramIcon />
+                      </a>
+                    )}
+
+                    {facebookUrl && (
+                      <a
+                        href={facebookUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Facebook"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#8C5A5A]/25 transition hover:opacity-70"
+                      >
+                        <FacebookIcon />
+                      </a>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Right: Address + contacts */}
+            <div className="grid gap-10 text-left sm:grid-cols-2 md:justify-self-end md:gap-12">
+              {hasAddressBlock && (
+                <div className="min-w-[180px]">
+                  <h4 className="mb-3 text-base font-semibold">Indirizzo</h4>
+
+                  {addressName && (
+                    <p className="text-sm leading-7">{addressName}</p>
+                  )}
+
+                  {addressLine1 &&
+                    (mapsUrl ? (
+                      <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block text-sm leading-7 hover:underline"
+                      >
+                        {addressLine1}
+                      </a>
+                    ) : (
+                      <p className="text-sm leading-7">{addressLine1}</p>
+                    ))}
+
+                  {addressLine2 &&
+                    (mapsUrl ? (
+                      <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block text-sm leading-7 hover:underline"
+                      >
+                        {addressLine2}
+                      </a>
+                    ) : (
+                      <p className="text-sm leading-7">{addressLine2}</p>
+                    ))}
+                </div>
+              )}
+
+              {hasContactsBlock && (
+                <div className="min-w-[180px]">
+                  <h4 className="mb-3 text-base font-semibold">Contatti</h4>
+
+                  {phone && (
+                    <a
+                      href={`tel:${sanitizePhone(phone)}`}
+                      className="block text-sm leading-7 hover:underline"
+                    >
+                      T: {phone}
+                    </a>
+                  )}
+
+                  {email && (
+                    <a
+                      href={`mailto:${email}`}
+                      className="block text-sm leading-7 hover:underline"
+                    >
+                      E: {email}
+                    </a>
+                  )}
+
+                  {whatsapp && (
+                    <a
+                      href={`https://wa.me/${sanitizeWhatsapp(whatsapp)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block text-sm leading-7 hover:underline"
+                    >
+                      W: {whatsapp.startsWith("+") ? whatsapp : `+${whatsapp}`}
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-          {tagline && (
-            <p className="mt-2 text-sm opacity-80 max-w-sm">
-              {tagline}
-            </p>
-          )}
-        </div>
-
-        {/* Contacts */}
-        <div className="text-sm space-y-2">
-          {phone && (
-            <div>
-              Tel:{" "}
-              <a href={`tel:${phone}`} className="hover:underline">
-                {phone}
-              </a>
-            </div>
-          )}
-
-          {whatsapp && (
-            <div>
-              WhatsApp:{" "}
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                +{whatsapp}
-              </a>
-            </div>
-          )}
-
-          {address && <div>{address}</div>}
-
-          {bookingUrl && (
-            <div className="mt-4">
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block rounded-xl px-4 py-2 accent-strong-bg accent-strong-text hover:opacity-90 transition"
-              >
-                {ctaText || "Prenota"}
-              </a>
-            </div>
-          )}
         </div>
       </div>
 
-      <div className="border-t py-4 text-center text-xs opacity-70">
-        © {new Date().getFullYear()} {studioName || "Studio"}
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-6 text-sm md:flex-row md:items-center md:justify-between md:px-8">
+        <div className="text-[#8C5A5A]/80">
+          © {new Date().getFullYear()} {legalName || brand}
+          {vatNumber ? ` · P.IVA ${vatNumber}` : ""}
+        </div>
+
+        {hasLegalLinks && (
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {privacyUrl && (
+              <Link
+                href={privacyUrl}
+                className="underline underline-offset-4 hover:opacity-70"
+              >
+                Privacy Policy
+              </Link>
+            )}
+
+            {cookieUrl && (
+              <Link
+                href={cookieUrl}
+                className="underline underline-offset-4 hover:opacity-70"
+              >
+                Cookie Policy
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </footer>
   );

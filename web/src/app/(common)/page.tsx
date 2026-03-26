@@ -1,253 +1,109 @@
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import Reveal from "@/components/animations/Reveal";
+import { homePageQuery } from "@/sanity/lib/queries";
+import Section2Title from "@/components/home/Section2Title";
 
-const QUERY = `{
-  "settings": *[_type=="siteSettings"][0]{
-    studioName, tagline, ctaText, ctaUrl, bookingUrl,
-    phone, whatsapp, address, mapsEmbedUrl,
-    showPrices, showReviews
-  },
-  "home": *[_type=="homePage"][0]{
-    heroTitle, heroSubtitle, introText, studioVideoUrl,
-    featuredServices[]->{
-      _id, title, category, description, duration, price, highlights
-    },
-    collaborations[]{name, url}
-  },
-  "prices": *[_type=="priceItem" && active==true]|order(order asc){
-    _id, category, title, price, note
-  },
-  "reviews": *[_type=="review" && published==true]|order(order asc){
-    _id, authorName, text, rating, source
-  }
-}`;
 
 export default async function HomePage() {
-  const data = await client.fetch(QUERY);
-
+  const data = await client.fetch(homePageQuery);
   const settings = data?.settings ?? {};
   const home = data?.home ?? {};
-  const prices = Array.isArray(data?.prices) ? data.prices : [];
-  const reviews = Array.isArray(data?.reviews) ? data.reviews : [];
-
-  const bookingUrl = settings.bookingUrl || settings.ctaUrl;
-  const ctaText = settings.ctaText || "Prenota";
 
   return (
-    <main className="bg-soft min-h-screen">
-      {/* HERO */}
+    <main className="min-h-screen bg-soft-gradient">
+      {/* SECTION 1 */}
       <Reveal>
-        <section className="px-6 pt-10 pb-8">
-          <div className="mx-auto max-w-5xl">
-            <p className="text-sm opacity-70 ">{settings.studioName}</p>
-
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl accent-text">
-              {home.heroTitle || "Titolo Hero"}
-            </h1>
-
-            {home.heroSubtitle && (
-              <p className="mt-3 max-w-2xl text-base opacity-80">
-                {home.heroSubtitle}
-              </p>
+        <section className="px-6 pt-10 pb-12 md:pt-14 md:pb-16">
+          <div className="mx-auto max-w-6xl">
+            {home.heroMarqueeText && (
+              <div className="mb-8 overflow-hidden border-y border-black/10 py-3">
+                <p className="whitespace-nowrap text-center text-sm uppercase tracking-[0.22em] text-[#8C5A5A]/80">
+                  {home.heroMarqueeText}
+                </p>
+              </div>
             )}
 
-            {home.introText && (
-              <p className="mt-4 max-w-2xl text-sm opacity-80">
-                {home.introText}
-              </p>
+            {Array.isArray(home.heroImages) && home.heroImages.length >= 5 && (
+              <div className="flex items-end justify-center gap-4 md:gap-6">
+                <div className="mb-8 w-1/6 md:mb-12">
+                  <div className="overflow-hidden rounded-t-[120px]">
+                    <img
+                      src={home.heroImages[0].url}
+                      alt={home.heroImages[0].alt || settings.studioName || "Studio"}
+                      className="h-[260px] w-full object-cover md:h-[340px]"
+                    />
+                  </div>
+                </div>
+                <div className="mb-5 w-1/6 md:mb-8">
+                  <div className="overflow-hidden rounded-t-[120px]">
+                    <img
+                      src={home.heroImages[0].url}
+                      alt={home.heroImages[0].alt || settings.studioName || "Studio"}
+                      className="h-[300px] w-full object-cover md:h-[400px]"
+                    />
+                  </div>
+                </div>
+
+                <div className="w-1/6">
+                  <div className="overflow-hidden rounded-t-[160px]">
+                    <img
+                      src={home.heroImages[1].url}
+                      alt={home.heroImages[1].alt || settings.studioName || "Studio"}
+                      className="h-[340px] w-full object-cover md:h-[460px]"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-5 w-1/6 md:mb-8">
+                  <div className="overflow-hidden rounded-t-[160px]">
+                    <img
+                      src={home.heroImages[2].url}
+                      alt={home.heroImages[2].alt || settings.studioName || "Studio"}
+                      className="h-[300px] w-full object-cover md:h-[400px]"
+                    />
+                  </div>
+                </div>
+                <div className="mb-8 w-1/6 md:mb-12">
+                  <div className="overflow-hidden rounded-t-[120px]">
+                    <img
+                      src={home.heroImages[0].url}
+                      alt={home.heroImages[0].alt || settings.studioName || "Studio"}
+                      className="h-[260px] w-full object-cover md:h-[340px]"
+                    />
+                  </div>
+                </div>
+              </div>
             )}
+          </div>
+        </section>
+      </Reveal>
 
-            {/* <div className="mt-6 flex flex-wrap gap-3">
-            {bookingUrl ? (
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-2xl px-5 py-3 text-sm font-medium text-white accent-bg hover:opacity-90 focus:accent-ring transition"
+      {/* SECTION 2 */}
+      <section className="px-6 pb-16 md:pb-24 overflow-hidden">
+        <div className="mx-auto max-w-6xl border-t border-black/10 pt-10 md:pt-14">
+          <Reveal>
+            <div className="mt-1 mb-3 flex flex-col items-center text-center gap-10">
+              {home.section2Title && (
+                <Section2Title title={home.section2Title} />
+              )}
 
+              {home.section2Subtitle && (
+                <p className="text-lg font-medium uppercase tracking-[0.14em] text-[#8C5A5A] md:text-xl lg:text-4xl">
+                  {home.section2Subtitle}
+                </p>
+              )}
+
+              <Link
+                href={home.section2ButtonLink || "/about"}
+                className="inline-flex rounded-full bg-[#8C5A5A] px-6 py-3 text-sm uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-[#6f4444]"
               >
-                {ctaText}
-              </a>
-            ) : (
-              <span className="rounded-2xl border px-5 py-3 text-sm opacity-70">
-                (Imposta bookingUrl in Impostazioni sito)
-              </span>
-            )}
-
-            <Link
-              href="/servizi/chiropratica"
-              className="rounded-2xl border px-5 py-3 text-sm"
-            >
-              Chiropratica
-            </Link>
-            <Link
-              href="/servizi/pilates"
-              className="rounded-2xl border px-5 py-3 text-sm"
-            >
-              Pilates
-            </Link>
-          </div> */}
-          </div>
-        </section>
-      </Reveal>
-      {/* VIDEO */}
-      {home.studioVideoUrl && (
-        <Reveal>
-          <section className="pb-10">
-            <div className="relative w-full overflow-hidden">
-              <iframe
-                src={home.studioVideoUrl}
-                className="aspect-video w-full"
-                allow="autoplay; fullscreen; encrypted-media"
-                allowFullScreen
-                title="Video dello studio"
-              />
+                {home.section2ButtonText || "CHI SIAMO"}
+              </Link>
             </div>
-          </section>
-        </Reveal>
-      )}
-
-      {/* FEATURED SERVICES */}
-      {Array.isArray(home.featuredServices) && home.featuredServices.length > 0 && (
-        <Reveal>
-          <section className="px-6 pb-10">
-            <div className="mx-auto max-w-5xl">
-              <h2 className="text-xl font-semibold">Servizi</h2>
-
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                {home.featuredServices.map((s: any) => (
-                  <div key={s._id} className="rounded-2xl border p-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="text-lg font-medium">{s.title}</div>
-                      {s.category && (
-                        <span className="rounded-full px-3 py-1 text-xs font-medium accent-soft">
-                          {s.category}
-                        </span>
-                      )}
-                    </div>
-
-                    {s.description && (
-                      <p className="mt-2 text-sm opacity-80">{s.description}</p>
-                    )}
-
-                    <div className="mt-4 flex flex-wrap gap-2 text-sm">
-                      {s.duration && (
-                        <span className="rounded-full border px-3 py-1">
-                          {s.duration}
-                        </span>
-                      )}
-                      {s.price && (
-                        <span className="rounded-full border px-3 py-1">
-                          {s.price}
-                        </span>
-                      )}
-                    </div>
-
-                    {Array.isArray(s.highlights) && s.highlights.length > 0 && (
-                      <ul className="mt-4 list-disc pl-5 text-sm">
-                        {s.highlights.slice(0, 6).map((h: string, i: number) => (
-                          <li key={i}>{h}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </Reveal>
-      )}
-
-      {/* PRICES (toggle) */}
-      {settings.showPrices && prices.length > 0 && (
-        <Reveal>
-          <section className="px-6 pb-10">
-            <div className="mx-auto max-w-5xl">
-              <h2 className="text-xl font-semibold">Prezzi</h2>
-
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                {prices.map((p: any) => (
-                  <div key={p._id} className="rounded-2xl border p-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="font-medium">{p.title}</div>
-                      {p.price && <div className="text-sm opacity-90">{p.price}</div>}
-                    </div>
-
-                    <div className="mt-2 flex flex-wrap gap-2 text-xs">
-                      {p.category && (
-                        <span className="rounded-full border px-3 py-1 opacity-80">
-                          {p.category}
-                        </span>
-                      )}
-                      {p.note && (
-                        <span className="rounded-full border px-3 py-1 opacity-80">
-                          {p.note}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </Reveal>
-      )}
-
-      {/* REVIEWS (toggle) */}
-      {settings.showReviews && reviews.length > 0 && (
-        <Reveal>
-          <section className="px-6 pb-12">
-            <div className="mx-auto max-w-5xl">
-              <h2 className="text-xl font-semibold">Recensioni</h2>
-
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                {reviews.map((r: any) => (
-                  <div key={r._id} className="rounded-2xl border p-5">
-                    <p className="text-sm opacity-80">{r.text}</p>
-
-                    <div className="mt-3 flex items-center justify-between text-xs opacity-80">
-                      <span>{r.authorName || "Anonimo"}</span>
-                      <span className="flex items-center gap-2">
-                        {typeof r.rating === "number" ? `★ ${r.rating}/5` : null}
-                        {r.source ? `· ${r.source}` : null}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </Reveal>
-      )}
-
-      {/* CONTACTS / FOOTER CTA */}
-      <Reveal>
-        <section className="px-6 pb-14">
-          <div className="mx-auto max-w-5xl rounded-2xl border p-6">
-            <h2 className="text-xl font-semibold">Contatti</h2>
-
-            <div className="mt-3 grid gap-2 text-sm opacity-85">
-              {settings.phone && <div>Telefono: {settings.phone}</div>}
-              {settings.whatsapp && <div>WhatsApp: {settings.whatsapp}</div>}
-              {settings.address && <div>Indirizzo: {settings.address}</div>}
-            </div>
-
-            {bookingUrl && (
-              <div className="mt-5">
-                <a
-                  href={bookingUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block rounded-2xl border px-5 py-3 text-sm font-medium"
-                >
-                  {ctaText}
-                </a>
-              </div>
-            )}
-          </div>
-        </section>
-      </Reveal>
+          </Reveal>
+        </div>
+      </section>
     </main>
   );
 }
