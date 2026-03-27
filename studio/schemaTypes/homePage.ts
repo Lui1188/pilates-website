@@ -36,13 +36,6 @@ export default defineType({
     }),
 
     defineField({
-      name: "section2ScrollText",
-      title: "Testo grande scorrevole sezione 2",
-      type: "string",
-      description: 'Esempio: CHIROLATES.',
-    }),
-
-    defineField({
       name: "section2Title",
       title: "Titolo grande sezione 2",
       type: "string",

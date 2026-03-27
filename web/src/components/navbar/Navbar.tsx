@@ -114,11 +114,11 @@ export default function Navbar({ studioName, logoUrl }: NavbarProps) {
           </Link>
 
           <Link
-            href="/chi-sono"
+            href="/about"
             onClick={close}
             className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            Chi sono
+            Chi siamo
           </Link>
 
           <Link

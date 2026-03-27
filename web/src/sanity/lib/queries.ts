@@ -38,3 +38,13 @@ export const homePageQuery = `{
     section2ButtonLink
   }
 }`;
+
+export const aboutPageQuery = `*[_type == "aboutPage"][0]{
+  pageTitle,
+  "heroImageUrl": heroImage.asset->url,
+  "heroImageAlt": heroImage.alt,
+  contentBlocks[]{
+    title,
+    text
+  }
+}`;

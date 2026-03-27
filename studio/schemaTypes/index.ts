@@ -4,6 +4,7 @@ import scheduleItem from "./scheduleItem";
 import teamMember from "./teamMember";
 
 import homePage from "./homePage";
+import aboutPage from "./aboutPage";
 import review from "./review";
 import priceItem from "./priceItem";
 
@@ -15,5 +16,6 @@ export const schemaTypes = [
   teamMember,
   review,
   priceItem,
+  aboutPage  
 ];
 

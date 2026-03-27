@@ -95,8 +95,8 @@ export default function Footer({
         <div className="mx-auto max-w-7xl px-6 py-14 md:px-8 md:py-20">
           <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr_1.4fr] md:items-start md:gap-10 lg:gap-16">
             {/* Left: Logo + tagline */}
-            <div className="flex flex-col items-start text-left">
-              <Link href="/" className="inline-flex justify-start">
+            <div className="flex flex-col items-center text-center md:items-start md:text-left">
+              <Link href="/" className="inline-flex justify-center md:justify-start">
                 {logoUrl ? (
                   <img
                     src={logoUrl}
@@ -118,7 +118,7 @@ export default function Footer({
             </div>
 
             {/* Center: Social */}
-            <div className="flex flex-col items-start text-left md:items-center md:text-center">
+            <div className="flex flex-col items-center text-center">
               {hasSocials && (
                 <>
                   <h4 className="mb-4 text-base font-semibold">Seguici</h4>
@@ -152,7 +152,7 @@ export default function Footer({
             </div>
 
             {/* Right: Address + contacts */}
-            <div className="grid gap-10 text-left sm:grid-cols-2 md:justify-self-end md:gap-12">
+            <div className="grid gap-10 text-center sm:grid-cols-2 md:justify-self-end md:gap-12 md:text-left">
               {hasAddressBlock && (
                 <div className="min-w-[180px]">
                   <h4 className="mb-3 text-base font-semibold">Indirizzo</h4>
@@ -230,14 +230,14 @@ export default function Footer({
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-6 text-sm md:flex-row md:items-center md:justify-between md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 py-6 text-center text-sm md:flex-row md:items-center md:justify-between md:px-8 md:text-left">
         <div className="text-[#8C5A5A]/80">
           © {new Date().getFullYear()} {legalName || brand}
           {vatNumber ? ` · P.IVA ${vatNumber}` : ""}
         </div>
 
         {hasLegalLinks && (
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-end">
             {privacyUrl && (
               <Link
                 href={privacyUrl}
