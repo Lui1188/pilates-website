@@ -2,57 +2,61 @@ import { defineType, defineField } from "sanity";
 
 export default defineType({
   name: "course",
-  title: "Corsi",
+  title: "Corso",
   type: "document",
   fields: [
-    defineField({ name: "title", title: "Nome corso", type: "string", validation: (r) => r.required() }),
-    defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title", maxLength: 96 } }),
     defineField({
-      name: "category",
-      title: "Categoria",
+      name: "title",
+      title: "Titolo",
       type: "string",
-      options: { list: ["Chiropratica", "Pilates"] },
-      validation: (r) => r.required(),
+      validation: (Rule) => Rule.required(),
     }),
-    defineField({ name: "description", title: "Descrizione", type: "text" }),
-    defineField({ name: "duration", title: "Durata", type: "string", description: "es. 50 min" }),
-    defineField({ name: "level", title: "Livello", type: "string", options: { list: ["Base", "Intermedio", "Avanzato", "Tutti"] }, initialValue: "Tutti" }),
-    defineField({ name: "price", title: "Prezzo", type: "string", description: 'es. "€15" oppure "Su richiesta"' }),
-    defineField({ name: "order", title: "Ordine", type: "number", initialValue: 10 }),
-    defineField({ name: "image", title: "Immagine", type: "image", options: { hotspot: true } }),
     defineField({
-      name: "subServices",
-      title: "Sotto-servizi (opzionale)",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          fields: [
-            defineField({ name: "title", title: "Titolo", type: "string" }),
-            defineField({ name: "description", title: "Descrizione", type: "text" }),
-            defineField({ name: "duration", title: "Durata", type: "string" }),
-            defineField({ name: "price", title: "Prezzo", type: "string" }),
-          ],
-        },
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "subtitle",
+      title: "Sottotitolo",
+      type: "string",
+    }),
+    defineField({
+      name: "heroImage",
+      title: "Immagine hero",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt text",
+          type: "string",
+        }),
       ],
-      description: 'Esempio: Pilates → "Reformer", "Matwork"',
     }),
     defineField({
-      name: "highlights",
-      title: "Punti chiave",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "3–6 bullet (benefici / focus)",
+      name: "shortDescription",
+      title: "Descrizione breve",
+      type: "text",
+      rows: 3,
     }),
     defineField({
-      name: "practitioners",
-      title: "Erogato da",
+      name: "content",
+      title: "Contenuto",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "teamMember" }] }],
+      of: [{ type: "block" }],
     }),
   ],
-
-  orderings: [
-    { title: "Ordine", name: "orderAsc", by: [{ field: "order", direction: "asc" }] },
-  ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "slug.current",
+      media: "heroImage",
+    },
+  },
 });

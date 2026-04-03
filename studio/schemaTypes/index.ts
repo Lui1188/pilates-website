@@ -5,8 +5,7 @@ import teamMember from "./teamMember";
 
 import homePage from "./homePage";
 import aboutPage from "./aboutPage";
-import review from "./review";
-import priceItem from "./priceItem";
+import pilatesPage from "./pilatesPage";
 
 export const schemaTypes = [
   siteSettings,
@@ -14,8 +13,7 @@ export const schemaTypes = [
   course,
   scheduleItem,
   teamMember,
-  review,
-  priceItem,
-  aboutPage  
+  aboutPage,
+  pilatesPage
 ];
 

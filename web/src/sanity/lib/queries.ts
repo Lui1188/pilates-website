@@ -48,3 +48,44 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0]{
     text
   }
 }`;
+
+export const pilatesPageQuery = `
+  *[_type == "pilatesPage"][0]{
+    pageTitle,
+    introText,
+    sections[]{
+      _key,
+      title,
+      text,
+      "imageUrl": image.asset->url,
+      "imageAlt": image.alt
+    },
+    coursesSectionTitle,
+    coursesSectionDescription,
+    coursesGallery[]{
+      _key,
+      title,
+      description,
+      "imageUrl": image.asset->url,
+      "imageAlt": image.alt,
+      "slug": course->slug.current
+    }
+  }
+`;
+
+export const courseSlugsQuery = `
+  *[_type == "course" && defined(slug.current)]{
+    "slug": slug.current
+  }
+`;
+
+export const courseBySlugQuery = `
+  *[_type == "course" && slug.current == $slug][0]{
+    title,
+    subtitle,
+    shortDescription,
+    content,
+    "heroImageUrl": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt
+  }
+`;

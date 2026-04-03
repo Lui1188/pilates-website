@@ -57,12 +57,12 @@ export default function Navbar({ studioName, logoUrl }: NavbarProps) {
   return (
     <>
       <header className="sticky top-0 z-50 bg-soft">
-        <div className="relative mx-auto flex max-w-6xl items-center justify-center px-6 py-3">
+        <div className="relative mx-auto flex max-w-6xl items-center justify-center px-6 py-1">
           <Link href="/" onClick={close} className="flex items-center justify-center">
             <img
               src={logoUrl || "/logo.svg"}
               alt={brand}
-              className="h-26 w-auto md:h-35"
+              className="h-26 w-auto md:h-25"
             />
           </Link>
         </div>
