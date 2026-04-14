@@ -69,42 +69,45 @@ export default function PilatesCoursesSection({
             ›
           </button>
 
-          <div ref={scrollRef} className="overflow-hidden">
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto overflow-y-hidden scroll-smooth md:overflow-hidden"
+          >
             <div className="flex w-max gap-5">
               {courses.map((course) => {
                 console.log("COURSE:", course);
-return (
-                <Link
-                  key={course._key}
-                  href={course.slug ? `/corsi/${course.slug}` : "#"}
-                  className="group relative block h-[618px] w-[400px] shrink-0"
-                >
-                  {course.imageUrl ? (
-                    <img
-                      src={course.imageUrl}
-                      alt={course.imageAlt || course.title || "Corso Pilates"}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <div className="h-full w-full bg-white/20" />
-                  )}
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-
-                  <div className="absolute bottom-0 p-6 text-white">
-                    {course.title && (
-                      <h3 className="text-lg uppercase">{course.title}</h3>
+                return (
+                  <Link
+                    key={course._key}
+                    href={course.slug ? `/servizi/pilates/corsi/${course.slug}` : "#"}
+                    className="group relative block h-[618px] w-[400px] shrink-0"
+                  >
+                    {course.imageUrl ? (
+                      <img
+                        src={course.imageUrl}
+                        alt={course.imageAlt || course.title || "Corso Pilates"}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-white/20" />
                     )}
 
-                    {course.description && (
-                      <p className="mt-2 text-sm text-white/90">
-                        {course.description}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-               );
-})}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+
+                    <div className="absolute bottom-0 p-6 text-white">
+                      {course.title && (
+                        <h3 className="text-lg uppercase">{course.title}</h3>
+                      )}
+
+                      {course.description && (
+                        <p className="mt-2 text-sm text-white/90">
+                          {course.description}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
