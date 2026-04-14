@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 type NavbarProps = {
   studioName?: string;
   logoUrl?: string | null;
+  lang: string;
 };
 
 function Hamburger({ open }: { open: boolean }) {
@@ -33,7 +34,7 @@ function Hamburger({ open }: { open: boolean }) {
   );
 }
 
-export default function Navbar({ studioName, logoUrl }: NavbarProps) {
+export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const brand = studioName || "Chirolates Studio";
 
@@ -54,21 +55,34 @@ export default function Navbar({ studioName, logoUrl }: NavbarProps) {
   const close = () => setOpen(false);
   const toggleMenu = () => setOpen((prev) => !prev);
 
+  const t = {
+    home: lang === "en" ? "Home" : "Home",
+    chiropractic: lang === "en" ? "Chiropractic" : "Chiropratica",
+    pilates: "Pilates",
+    about: lang === "en" ? "About us" : "Chi siamo",
+    contacts: lang === "en" ? "Contacts" : "Contatti",
+  };
+
   return (
     <>
       <header className="sticky top-0 z-50 bg-soft">
-        <div className="relative mx-auto flex max-w-6xl items-center justify-center px-6 py-1">
-          <Link href="/" onClick={close} className="flex items-center justify-center">
+        <div className="relative mx-auto flex max-w-6xl items-center justify-center px-6 py-3">
+
+          <div className="absolute left-6 flex items-center gap-3 text-sm uppercase text-[#8C5A5A]">
+            <Link href="/it">IT</Link>|<Link href="/en">EN</Link>
+          </div>
+
+          <Link href={`/${lang}`} onClick={close} className="flex items-center justify-center">
             <img
               src={logoUrl || "/logo.svg"}
               alt={brand}
-              className="h-26 w-auto md:h-25"
+              className="h-20 w-auto md:h-24"
             />
           </Link>
+
         </div>
       </header>
 
-      {/* Hamburger always visible above everything */}
       <button
         type="button"
         onClick={toggleMenu}
@@ -84,49 +98,49 @@ export default function Navbar({ studioName, logoUrl }: NavbarProps) {
         id="fullscreen-menu"
         aria-hidden={!open}
         className={[
-          "fixed inset-0 z-[90] flex min-h-screen w-full flex-col justify-center bg-soft transition-all duration-300 text-[#8C5A5A]",
+          "fixed inset-0 z-[90] flex min-h-screen w-full flex-col justify-center bg-soft text-[#8C5A5A] transition-all duration-300",
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         ].join(" ")}
       >
         <nav className="flex flex-col items-center justify-center gap-6 px-6 text-center">
           <Link
-            href="/"
+            href={`/${lang}`}
             onClick={close}
             className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            Home
+            {t.home}
           </Link>
 
           <Link
-            href="/servizi/chiropratica"
+            href={`/${lang}/servizi/chiropratica`}
             onClick={close}
             className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            Chiropratica
+            {t.chiropractic}
           </Link>
 
           <Link
-            href="/servizi/pilates"
+            href={`/${lang}/servizi/pilates`}
             onClick={close}
             className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            Pilates
+            {t.pilates}
           </Link>
 
           <Link
-            href="/about"
+            href={`/${lang}/about`}
             onClick={close}
             className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            Chi siamo
+            {t.about}
           </Link>
 
           <Link
-            href="/contatti"
+            href={`/${lang}/contatti`}
             onClick={close}
             className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            Contatti
+            {t.contacts}
           </Link>
         </nav>
       </div>

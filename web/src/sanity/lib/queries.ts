@@ -21,17 +21,17 @@ export const siteSettingsQuery = `
 `;
 
 
-export const homePageQuery = `{
- "settings": *[_type=="siteSettings"][0]{
+export const homePageQuery = `
+{
+  "settings": *[_type == "siteSettings"][0]{
     studioName
   },
-  "home": *[_type=="homePage"][0]{
+  "home": *[_type == "homePage" && language == $lang][0]{
     heroMarqueeText,
     "heroImages": heroImages[]{
       "url": asset->url,
       alt
     },
-    section2ScrollText,
     section2Title,
     section2Subtitle,
     section2ButtonText,

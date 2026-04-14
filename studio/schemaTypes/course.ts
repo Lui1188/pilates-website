@@ -6,6 +6,18 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "language",
+      title: "Lingua",
+      type: "string",
+      options: {
+        list: [
+          { title: "Italiano", value: "it" },
+          { title: "English", value: "en" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "title",
       title: "Titolo",
       type: "string",

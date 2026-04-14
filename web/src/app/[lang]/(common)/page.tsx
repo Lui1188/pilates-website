@@ -4,8 +4,14 @@ import Reveal from "@/components/animations/Reveal";
 import { homePageQuery } from "@/sanity/lib/queries";
 import Section2Title from "@/components/home/Section2Title";
 
-export default async function HomePage() {
-  const data = await client.fetch(homePageQuery);
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+
+  const data = await client.fetch(homePageQuery, { lang });
   const settings = data?.settings ?? {};
   const home = data?.home ?? {};
 
@@ -18,7 +24,6 @@ export default async function HomePage() {
             <div className="mx-auto max-w-6xl">
               {home.heroMarqueeText && (
                 <div className="mb-8 overflow-hidden border-y border-black/10 py-3">
-
                   {/* MOBILE */}
                   <div className="overflow-hidden md:hidden">
                     <div className="flex w-max animate-marquee">
@@ -31,11 +36,10 @@ export default async function HomePage() {
                     </div>
                   </div>
 
-                  {/* DESKTOP  */}
+                  {/* DESKTOP */}
                   <p className="hidden text-center text-sm uppercase tracking-[0.22em] text-[#8C5A5A]/80 md:block">
                     {home.heroMarqueeText}
                   </p>
-
                 </div>
               )}
 
@@ -52,14 +56,16 @@ export default async function HomePage() {
                           className={`w-1/3 ${!isCenter ? "mb-6" : ""}`}
                         >
                           <div
-                            className={`overflow-hidden ${isCenter ? "rounded-t-[120px]" : "rounded-t-[90px]"
-                              }`}
+                            className={`overflow-hidden ${
+                              isCenter ? "rounded-t-[120px]" : "rounded-t-[90px]"
+                            }`}
                           >
                             <img
                               src={img.url}
                               alt={img.alt || settings.studioName || "Studio"}
-                              className={`w-full object-cover ${isCenter ? "h-[280px]" : "h-[220px]"
-                                }`}
+                              className={`w-full object-cover ${
+                                isCenter ? "h-[280px]" : "h-[220px]"
+                              }`}
                             />
                           </div>
                         </div>
@@ -78,25 +84,27 @@ export default async function HomePage() {
                         <div
                           key={i}
                           className={`w-1/6 
-              ${isOuter ? "mb-8 md:mb-12" : ""}
-              ${isNear ? "mb-5 md:mb-8" : ""}
-            `}
+                            ${isOuter ? "mb-8 md:mb-12" : ""}
+                            ${isNear ? "mb-5 md:mb-8" : ""}
+                          `}
                         >
                           <div
-                            className={`overflow-hidden ${isCenter ? "rounded-t-[160px]" : "rounded-t-[120px]"
-                              }`}
+                            className={`overflow-hidden ${
+                              isCenter ? "rounded-t-[160px]" : "rounded-t-[120px]"
+                            }`}
                           >
                             <img
                               src={img.url}
                               alt={img.alt || settings.studioName || "Studio"}
                               className={`w-full object-cover 
-                  ${isCenter
-                                  ? "h-[340px] md:h-[460px]"
-                                  : isNear
+                                ${
+                                  isCenter
+                                    ? "h-[340px] md:h-[460px]"
+                                    : isNear
                                     ? "h-[300px] md:h-[400px]"
                                     : "h-[260px] md:h-[340px]"
                                 }
-                `}
+                              `}
                             />
                           </div>
                         </div>
@@ -110,7 +118,7 @@ export default async function HomePage() {
         </Reveal>
 
         {/* SECTION 2 */}
-        <section className="px-6 pb-16 md:pb-24 overflow-hidden">
+        <section className="overflow-hidden px-6 pb-16 md:pb-24">
           <div className="mx-auto max-w-6xl border-t border-black/10 pt-10 md:pt-14">
             <Reveal>
               <div className="mt-1 mb-3 flex flex-col items-center gap-10 text-center">
@@ -123,7 +131,7 @@ export default async function HomePage() {
                 )}
 
                 <Link
-                  href={home.section2ButtonLink || "/about"}
+                  href={home.section2ButtonLink || `/${lang}/about`}
                   className="inline-flex rounded-full bg-[#8C5A5A] px-6 py-3 text-sm uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-[#6f4444]"
                 >
                   {home.section2ButtonText || "CHI SIAMO"}
