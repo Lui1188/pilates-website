@@ -64,7 +64,7 @@ export default function PilatesCoursesSection({
 
           <button
             onClick={() => scrollGallery("right")}
-           className="absolute right-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-[#8C5A5A] shadow-md transition hover:bg-white md:flex"
+            className="absolute right-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-[#8C5A5A] shadow-md transition hover:bg-white md:flex"
           >
             ›
           </button>
@@ -72,12 +72,11 @@ export default function PilatesCoursesSection({
           <div ref={scrollRef} className="overflow-hidden">
             <div className="flex w-max gap-5">
               {courses.map((course) => {
-                console.log(course);
-
-  return (
+                console.log("COURSE:", course);
+return (
                 <Link
                   key={course._key}
-                  href={course.url || (course.slug ? `/corsi/${course.slug}` : "#")}
+                  href={course.slug ? `/corsi/${course.slug}` : "#"}
                   className="group relative block h-[618px] w-[400px] shrink-0"
                 >
                   {course.imageUrl ? (
@@ -94,9 +93,7 @@ export default function PilatesCoursesSection({
 
                   <div className="absolute bottom-0 p-6 text-white">
                     {course.title && (
-                      <h3 className="text-lg uppercase">
-                        {course.title}
-                      </h3>
+                      <h3 className="text-lg uppercase">{course.title}</h3>
                     )}
 
                     {course.description && (
@@ -106,7 +103,8 @@ export default function PilatesCoursesSection({
                     )}
                   </div>
                 </Link>
-              )})}
+               );
+})}
             </div>
           </div>
         </section>

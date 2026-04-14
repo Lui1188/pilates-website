@@ -51,6 +51,53 @@ export default defineType({
       type: "array",
       of: [{ type: "block" }],
     }),
+
+    defineField({
+      name: "pricingSection",
+      title: "Sezione finale prezzo",
+      type: "object",
+      fields: [
+        defineField({
+          name: "image",
+          title: "Immagine",
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+            }),
+          ],
+        }),
+        defineField({
+          name: "price",
+          title: "Prezzo",
+          type: "string",
+        }),
+        defineField({
+          name: "title",
+          title: "Titolo",
+          type: "string",
+        }),
+        defineField({
+          name: "features",
+          title: "Lista elementi",
+          type: "array",
+          of: [{ type: "string" }],
+        }),
+        defineField({
+          name: "buttonText",
+          title: "Testo bottone",
+          type: "string",
+        }),
+        defineField({
+          name: "buttonLink",
+          title: "Link bottone",
+          type: "string",
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {

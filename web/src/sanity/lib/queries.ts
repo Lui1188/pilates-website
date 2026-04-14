@@ -86,6 +86,15 @@ export const courseBySlugQuery = `
     shortDescription,
     content,
     "heroImageUrl": heroImage.asset->url,
-    "heroImageAlt": heroImage.alt
+    "heroImageAlt": heroImage.alt,
+    "pricingSection": pricingSection{
+      "imageUrl": image.asset->url,
+      "imageAlt": image.alt,
+      price,
+      title,
+      features,
+      buttonText,
+      buttonLink
+    }
   }
 `;
