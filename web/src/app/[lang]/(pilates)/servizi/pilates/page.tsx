@@ -9,7 +9,7 @@ export default async function PilatesPage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const data = await client.fetch(pilatesPageQuery);
+  const data = await client.fetch(pilatesPageQuery, { lang });
 
   return (
     <>

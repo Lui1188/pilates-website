@@ -39,18 +39,20 @@ export const homePageQuery = `
   }
 }`;
 
-export const aboutPageQuery = `*[_type == "aboutPage"][0]{
-  pageTitle,
-  "heroImageUrl": heroImage.asset->url,
-  "heroImageAlt": heroImage.alt,
-  contentBlocks[]{
-    title,
-    text
+export const aboutPageQuery = `
+  *[_type == "aboutPage" && language == $lang][0]{
+    pageTitle,
+    "heroImageUrl": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
+    contentBlocks[]{
+      title,
+      text
+    }
   }
-}`;
+`;
 
 export const pilatesPageQuery = `
-  *[_type == "pilatesPage"][0]{
+  *[_type == "pilatesPage" && language == $lang][0]{
     pageTitle,
     introText,
     sections[]{
@@ -74,13 +76,14 @@ export const pilatesPageQuery = `
 `;
 
 export const courseSlugsQuery = `
-  *[_type == "course" && defined(slug.current)]{
-    "slug": slug.current
+  *[_type == "course" && defined(slug.current) && defined(language)]{
+    "slug": slug.current,
+    "lang": language
   }
 `;
 
 export const courseBySlugQuery = `
-  *[_type == "course" && slug.current == $slug][0]{
+  *[_type == "course" && slug.current == $slug && language == $lang][0]{
     title,
     subtitle,
     shortDescription,

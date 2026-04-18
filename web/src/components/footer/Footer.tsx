@@ -1,26 +1,22 @@
 import Link from "next/link";
 
 type FooterProps = {
+  lang: string;
   studioName?: string;
   legalName?: string;
   footerTagline?: string;
   logoUrl?: string | null;
-
   phone?: string;
   whatsapp?: string;
   email?: string;
-
   addressName?: string;
   addressLine1?: string;
   addressLine2?: string;
   mapsUrl?: string;
-
   instagramUrl?: string;
   facebookUrl?: string;
-
   privacyUrl?: string;
   cookieUrl?: string;
-
   vatNumber?: string;
 };
 
@@ -65,6 +61,7 @@ function sanitizeWhatsapp(whatsapp?: string) {
 }
 
 export default function Footer({
+  lang,
   studioName,
   legalName,
   footerTagline,
@@ -84,6 +81,23 @@ export default function Footer({
 }: FooterProps) {
   const brand = studioName || "Chirolates";
 
+  const labels = {
+    it: {
+      followUs: "Seguici",
+      address: "Indirizzo",
+      contacts: "Contatti",
+      vat: "P.IVA",
+    },
+    en: {
+      followUs: "Follow us",
+      address: "Address",
+      contacts: "Contacts",
+      vat: "VAT",
+    },
+  };
+
+  const t = labels[lang as keyof typeof labels] ?? labels.it;
+
   const hasAddressBlock = addressName || addressLine1 || addressLine2;
   const hasContactsBlock = phone || email || whatsapp;
   const hasSocials = instagramUrl || facebookUrl;
@@ -94,9 +108,8 @@ export default function Footer({
       <div className="border-y border-black/10">
         <div className="mx-auto max-w-7xl px-6 py-14 md:px-8 md:py-20">
           <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr_1.4fr] md:items-start md:gap-10 lg:gap-16">
-            {/* Left: Logo + tagline */}
             <div className="flex flex-col items-center text-center md:items-start md:text-left">
-              <Link href="/" className="inline-flex justify-center md:justify-start">
+              <Link href={`/${lang}`} className="inline-flex justify-center md:justify-start">
                 {logoUrl ? (
                   <img
                     src={logoUrl}
@@ -117,11 +130,10 @@ export default function Footer({
               )}
             </div>
 
-            {/* Center: Social */}
             <div className="flex flex-col items-center text-center">
               {hasSocials && (
                 <>
-                  <h4 className="mb-4 text-base font-semibold">Seguici</h4>
+                  <h4 className="mb-4 text-base font-semibold">{t.followUs}</h4>
                   <div className="flex flex-col items-center gap-3">
                     {instagramUrl && (
                       <a
@@ -151,15 +163,12 @@ export default function Footer({
               )}
             </div>
 
-            {/* Right: Address + contacts */}
             <div className="grid gap-10 text-center sm:grid-cols-2 md:justify-self-end md:gap-12 md:text-left">
               {hasAddressBlock && (
                 <div className="min-w-[180px]">
-                  <h4 className="mb-3 text-base font-semibold">Indirizzo</h4>
+                  <h4 className="mb-3 text-base font-semibold">{t.address}</h4>
 
-                  {addressName && (
-                    <p className="text-sm leading-7">{addressName}</p>
-                  )}
+                  {addressName && <p className="text-sm leading-7">{addressName}</p>}
 
                   {addressLine1 &&
                     (mapsUrl ? (
@@ -193,7 +202,7 @@ export default function Footer({
 
               {hasContactsBlock && (
                 <div className="min-w-[180px]">
-                  <h4 className="mb-3 text-base font-semibold">Contatti</h4>
+                  <h4 className="mb-3 text-base font-semibold">{t.contacts}</h4>
 
                   {phone && (
                     <a
@@ -233,7 +242,7 @@ export default function Footer({
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 py-6 text-center text-sm md:flex-row md:items-center md:justify-between md:px-8 md:text-left">
         <div className="text-[#8C5A5A]/80">
           © {new Date().getFullYear()} {legalName || brand}
-          {vatNumber ? ` · P.IVA ${vatNumber}` : ""}
+          {vatNumber ? ` · ${t.vat} ${vatNumber}` : ""}
         </div>
 
         {hasLegalLinks && (

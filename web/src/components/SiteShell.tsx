@@ -26,6 +26,7 @@ export default async function SiteShell({
       {children}
 
       <Footer
+        lang={lang}
         studioName={settings?.studioName}
         legalName={settings?.legalName}
         footerTagline={settings?.footerTagline}
