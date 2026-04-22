@@ -74,42 +74,42 @@ export default function PilatesScrollSection({
 
         <div className="grid gap-10 md:grid-cols-[1fr_0.9fr] md:gap-14">
           <div className="space-y-24 md:space-y-32">
-  {sections.map((section, index) => (
-    <section
-      key={section._key || index}
-      data-pilates-section
-      data-section-index={index}
-      className="min-h-[55vh] scroll-mt-28"
-    >
-      <div className="max-w-xl">
-        {/* Mobile image above section title */}
-        <div className="mb-8 overflow-hidden rounded-t-[280px] md:hidden">
-          {section.imageUrl ? (
-            <img
-              src={section.imageUrl}
-              alt={section.imageAlt || section.title || "Pilates"}
-              className="h-[360px] w-full object-cover"
-            />
-          ) : (
-            <div className="h-[360px] w-full bg-white/20" />
-          )}
-        </div>
+            {sections.map((section, index) => (
+              <section
+                key={section._key || index}
+                data-pilates-section
+                data-section-index={index}
+                className="min-h-[55vh] scroll-mt-28"
+              >
+                <div className="max-w-xl">
+                  {/* Mobile image above section title */}
+                  <div className="mb-8 overflow-hidden rounded-t-[280px] md:hidden">
+                    {section.imageUrl ? (
+                      <img
+                        src={section.imageUrl}
+                        alt={section.imageAlt || section.title || "Pilates"}
+                        className="h-[360px] w-full object-cover"
+                      />
+                    ) : (
+                      <div className="h-[360px] w-full bg-white/20" />
+                    )}
+                  </div>
 
-        {section.title && (
-          <h2 className="text-2xl uppercase text-[#8C5A5A] md:text-3xl">
-            {section.title}
-          </h2>
-        )}
+                  {section.title && (
+                    <h2 className="text-2xl uppercase text-[#8C5A5A] md:text-3xl">
+                      {section.title}
+                    </h2>
+                  )}
 
-        {section.text && (
-          <p className="mt-5 whitespace-pre-line text-base leading-8 text-[#8C5A5A]/85 md:text-lg">
-            {section.text}
-          </p>
-        )}
-      </div>
-    </section>
-  ))}
-</div>
+                  {section.text && (
+                    <p className="mt-5 whitespace-pre-line text-base leading-8 text-[#8C5A5A]/85 md:text-lg">
+                      {section.text}
+                    </p>
+                  )}
+                </div>
+              </section>
+            ))}
+          </div>
 
           <div className="hidden md:block">
             <div className="sticky top-28">
@@ -132,7 +132,7 @@ export default function PilatesScrollSection({
           </div>
         </div>
 
-       
+
       </div>
     </main>
   );

@@ -101,3 +101,83 @@ export const courseBySlugQuery = `
     }
   }
 `;
+
+export const chiropracticPageQuery = `
+*[_type == "chiropracticPage" && language == $lang][0]{
+
+  approachTitle,
+  approachSections[]{
+    _key,
+    title,
+    text,
+    "imageUrl": image.asset->url,
+    imageAlt
+  },
+
+  approachGalleryTitle,
+  approachGalleryTreatments[]->{
+    _id,
+    _type,
+    title,
+    "cardTitle": coalesce(cardTitle, title),
+    cardDescription,
+    "slug": slug.current,
+    "imageUrl": coalesce(cardImage.asset->url, heroImage.asset->url),
+    "imageAlt": coalesce(cardImageAlt, heroImageAlt, title)
+  },
+
+  faqTitle,
+  faqs[]{
+    _key,
+    question,
+    answer
+  },
+
+  whoWeHelpTitle,
+  "whoWeHelpSlug": whoWeHelpSlug.current,
+  whoWeHelpSections[]{
+    _key,
+    title,
+    text,
+    "imageUrl": image.asset->url,
+    imageAlt
+  },
+
+  conditionsTitle,
+  "conditionsSlug": conditionsSlug.current,
+  conditionsSections[]{
+    _key,
+    title,
+    text,
+    "imageUrl": image.asset->url,
+    imageAlt
+  }
+}
+`;
+
+export const chiropracticTreatmentSlugsQuery = `
+*[_type == "chiropracticTreatment"]{
+  "slug": slug.current,
+  language
+}
+`;
+
+export const chiropracticTreatmentBySlugQuery = `
+*[_type == "chiropracticTreatment" && slug.current == $slug && language == $lang][0]{
+  title,
+  subtitle,
+  shortDescription,
+  "heroImageUrl": heroImage.asset->url,
+  heroImageAlt,
+  content,
+  pricingSection{
+    price,
+    title,
+    features,
+    buttonText,
+    buttonLink,
+    "imageUrl": image.asset->url,
+    imageAlt
+  }
+}
+`;

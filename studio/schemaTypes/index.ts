@@ -1,19 +1,18 @@
 import siteSettings from "./siteSettings";
 import course from "./course";
-import scheduleItem from "./scheduleItem";
-import teamMember from "./teamMember";
-
 import homePage from "./homePage";
 import aboutPage from "./aboutPage";
 import pilatesPage from "./pilatesPage";
+import chiropracticPage from "./chiropracticPage";
+import chiropracticTreatment from "./chiropracticTreatment";
 
 export const schemaTypes = [
   siteSettings,
   homePage,
   course,
-  scheduleItem,
-  teamMember,
   aboutPage,
-  pilatesPage
+  pilatesPage,
+  chiropracticPage,
+  chiropracticTreatment
 ];
 

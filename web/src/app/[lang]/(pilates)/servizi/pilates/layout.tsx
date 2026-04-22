@@ -9,7 +9,7 @@ export default async function CommonLayout({
 }) {
   const { lang } = await params;
   return (
-    <SiteShell themeClass="theme-common" lang={lang}>
+    <SiteShell themeClass="theme-pilates" lang={lang}>
       {children}
     </SiteShell>
   );
