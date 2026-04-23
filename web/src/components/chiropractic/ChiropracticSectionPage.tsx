@@ -1,4 +1,5 @@
 "use client";
+import SectionBand from "@/components/SectionBand";
 
 type AlternatingSectionItem = {
   _key: string;
@@ -18,23 +19,25 @@ export default function ChiropracticSectionPage({
   sections,
 }: Props) {
   return (
-    <section className="px-6 py-14 md:px-10 md:py-20">
-      <div className="mx-auto max-w-6xl">
+    <section>
+      <div className="mx-auto max-w-6xl px-6 pt-24 md:px-10 md:pt-27">
         <div className="mb-10 md:mb-14">
           <h2 className="text-3xl uppercase tracking-[0.08em] md:text-5xl">
             {title}
           </h2>
         </div>
+      </div>
 
-        <div className="space-y-12 md:space-y-20">
-          {sections.map((section, index) => {
-            const reversed = index % 2 !== 0;
+      <div>
+        {sections.map((section, index) => {
+          const reversed = index % 2 !== 0;
 
-            return (
-              <article
-                key={section._key}
-                className="grid items-center gap-8 md:grid-cols-2 md:gap-14"
-              >
+          return (
+            <SectionBand
+              key={section._key}
+              variant={index % 2 === 0 ? "band1" : "band2"}
+            >
+              <div className="mx-auto grid max-w-6xl items-center gap-8 px-6 py-10 md:grid-cols-2 md:gap-14 md:px-10 md:py-16">
                 <div className={reversed ? "md:order-2" : "md:order-1"}>
                   {section.imageUrl ? (
                     <img
@@ -60,10 +63,10 @@ export default function ChiropracticSectionPage({
                     </p>
                   )}
                 </div>
-              </article>
-            );
-          })}
-        </div>
+              </div>
+            </SectionBand>
+          );
+        })}
       </div>
     </section>
   );

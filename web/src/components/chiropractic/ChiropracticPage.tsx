@@ -95,7 +95,7 @@ export default function ChiropracticPage({
   return (
     <>
       <section className="py-14 md:py-20">
-        <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mx-auto max-w-6xl px-6 md:px-10 pt-14">
           <SectionTitle title={data?.approachTitle || "Il nostro approccio"} />
         </div>
         <AlternatingSections sections={approachSections} />
@@ -115,7 +115,7 @@ export default function ChiropracticPage({
                 <button
                   type="button"
                   onClick={() => scrollGallery("left")}
-                  className="absolute left-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-[#8C5A5A] shadow-md transition hover:bg-white md:flex"
+                  className="absolute left-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 accent-text shadow-md transition hover:bg-white md:flex"
                   aria-label="Scorri galleria a sinistra"
                 >
                   ‹
@@ -126,7 +126,7 @@ export default function ChiropracticPage({
                 <button
                   type="button"
                   onClick={() => scrollGallery("right")}
-                  className="absolute right-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-[#8C5A5A] shadow-md transition hover:bg-white md:flex"
+                  className="absolute right-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 accent-text shadow-md transition hover:bg-white md:flex"
                   aria-label="Scorri galleria a destra"
                 >
                   ›
@@ -203,7 +203,7 @@ export default function ChiropracticPage({
                     <button
                       type="button"
                       onClick={() => setOpenIndex(isOpen ? null : index)}
-                      className="flex w-full items-center justify-between gap-4 py-5 text-left text-[#8C5A5A]"
+                      className="flex w-full items-center justify-between gap-4 py-5 text-left accent-text"
                       aria-expanded={isOpen}
                     >
                       <h3 className="text-base uppercase tracking-[0.06em] md:text-lg">
@@ -211,7 +211,7 @@ export default function ChiropracticPage({
                       </h3>
 
                       <span
-                        className={`text-xl text-[#8C5A5A] transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
+                        className={`text-xl accent-text transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
                       >
                         ›
                       </span>

@@ -61,13 +61,13 @@ export default function PilatesScrollSection({
     <main className="min-h-screen bg-soft-gradient px-6 pt-10 pb-16 md:pt-14 md:pb-24">
       <div className="mx-auto max-w-7xl">
         {data?.pageTitle && (
-          <h1 className="mb-6 text-4xl uppercase tracking-tight text-[#8C5A5A] md:mb-8 md:text-5xl">
+          <h1 className="mb-6 text-4xl uppercase tracking-tight accent-text md:mb-8 md:text-5xl">
             {data.pageTitle}
           </h1>
         )}
 
         {data?.introText && (
-          <p className="mb-10 max-w-2xl text-base leading-8 text-[#8C5A5A]/85 md:mb-14">
+          <p className="mb-10 max-w-2xl text-base leading-8 accent-text/85 md:mb-14">
             {data.introText}
           </p>
         )}
@@ -96,13 +96,13 @@ export default function PilatesScrollSection({
                   </div>
 
                   {section.title && (
-                    <h2 className="text-2xl uppercase text-[#8C5A5A] md:text-3xl">
+                    <h2 className="text-2xl uppercase accent-text md:text-3xl">
                       {section.title}
                     </h2>
                   )}
 
                   {section.text && (
-                    <p className="mt-5 whitespace-pre-line text-base leading-8 text-[#8C5A5A]/85 md:text-lg">
+                    <p className="mt-5 whitespace-pre-line text-base leading-8 accent-text/85 md:text-lg">
                       {section.text}
                     </p>
                   )}

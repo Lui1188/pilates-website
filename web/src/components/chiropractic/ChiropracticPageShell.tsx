@@ -40,9 +40,9 @@ export default function ChiropracticPageShell({
   ];
 
   return (
-    <main className="bg-[#EAF5F0] text-[#3B2F2F]">
+    <main className="bg-[#EAF5F0] accent-text">
 
-     <section className="fixed left-0 right-0 top-[104px] z-30 border-b border-black/10 bg-[#CBFFE7]/95 backdrop-blur md:top-[120px]">
+     <section className="fixed left-0 right-0 top-[104px] z-30 border-b border-black/10 bg-[#b2e0cb] backdrop-blur md:top-[120px]">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <div className="overflow-x-auto md:hidden">
             <div className="flex min-w-max gap-6 py-4 text-sm uppercase tracking-[0.12em]">
@@ -54,7 +54,7 @@ export default function ChiropracticPageShell({
                     key={item.href}
                     href={item.href}
                     className={`whitespace-nowrap transition hover:opacity-70 ${
-                      isActive ? "text-[#8C5A5A]" : ""
+                      isActive ? "accent-text" : ""
                     }`}
                   >
                     {item.label}
@@ -74,7 +74,7 @@ export default function ChiropracticPageShell({
                     key={item.href}
                     href={item.href}
                     className={`whitespace-nowrap transition hover:opacity-70 ${
-                      isActive ? "text-[#8C5A5A]" : ""
+                      isActive ? "accent-text" : ""
                     }`}
                   >
                     {item.label}

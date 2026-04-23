@@ -132,7 +132,7 @@ export default async function HomePage({
 
                 <Link
                   href={home.section2ButtonLink || `/${lang}/about`}
-                  className="inline-flex rounded-full bg-[#8C5A5A] px-6 py-3 text-sm uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-[#6f4444]"
+                  className="inline-flex rounded-full accent-bg px-6 py-3 text-sm uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-[#6f4444]"
                 >
                   {home.section2ButtonText || "CHI SIAMO"}
                 </Link>

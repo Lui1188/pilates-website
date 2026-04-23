@@ -21,21 +21,24 @@
 
 .theme-common {
   --bg: #F6DCDC;
-  /* --accent: #FFB7B7; */
-  --accent: #C88181;
+  --accent: #8C5A5A;
+  --band-1: #F9E8E8;
+  --band-2: #FFF4F4;
 }
 
 .theme-chiro {
-  --bg: #CBFFE7;
-  --text: #1f2723;
-  /* --accent: #73EFB6; */
-  --accent: #0ea45e;
+  --bg: #b2e0cb;
+  --text: #1a1d1b;
+  --accent: #0c5030;
+  --band-1: #EAF5F0;
+  --band-2: #F7FCF9;
 }
 
 .theme-pilates {
   --bg: #FFDCE9;
-  /* --accent: #FD7FAB; */
-  --accent: #CB1958;
+  --accent: #8C5A5A;
+  --band-1: #FFE8F0;
+  --band-2: #FFF5F8;
 }
 
 /* Utilities */
@@ -75,6 +78,14 @@
 
 .accent-light-text {
   color: color-mix(in srgb, var(--accent) 15%, white);
+}
+
+.band-1 {
+  background-color: var(--band-1);
+}
+
+.band-2 {
+  background-color: var(--band-2);
 }
 
 /* Dark mode base */

@@ -31,12 +31,12 @@ export default async function CoursePage({ params }: PageProps) {
         <Reveal delay={0.1}>
           <div className="mb-12">
 
-            <h1 className="text-4xl uppercase text-[#8C5A5A] md:text-8xl">
+            <h1 className="text-4xl uppercase accent-text md:text-8xl">
               {data.title}
             </h1>
 
             {data.subtitle && (
-              <p className="mt-4 text-lg text-[#8C5A5A]/80">{data.subtitle}</p>
+              <p className="mt-4 text-lg accent-text/80">{data.subtitle}</p>
             )}
           </div>
         </Reveal>
@@ -44,13 +44,13 @@ export default async function CoursePage({ params }: PageProps) {
           <section className="grid items-center gap-10 md:grid-cols-2">
             <div>
               {data.shortDescription && (
-                <h2 className="text-2xl uppercase text-[#8C5A5A] md:text-3xl">
+                <h2 className="text-2xl uppercase accent-text md:text-3xl">
                   {data.shortDescription}
                 </h2>
               )}
 
               {data.content?.length > 0 && (
-                <div className="mt-6 prose max-w-none prose-p:text-[#8C5A5A]/85">
+                <div className="mt-6 prose max-w-none prose-p:accent-text/85">
                   {data.content.map((block: any) => (
                     <p key={block._key} className="mb-4 leading-8">
                       {block.children?.map((child: any) => child.text).join("")}
@@ -86,23 +86,23 @@ export default async function CoursePage({ params }: PageProps) {
 
               <div className="absolute bottom-0 left-1/2 w-[90%] max-w-xl -translate-x-1/2 translate-y-1/2 bg-[#f8f1ec] p-8 shadow-xl md:p-10">
                 {data.pricingSection.price && (
-                  <p className="text-sm uppercase tracking-[0.2em] text-[#8C5A5A]/70">
+                  <p className="text-sm uppercase tracking-[0.2em] accent-text/70">
                     {data.pricingSection.price}
                   </p>
                 )}
 
                 {data.pricingSection.title && (
-                  <h3 className="mt-3 text-3xl uppercase text-[#8C5A5A] md:text-4xl">
+                  <h3 className="mt-3 text-3xl uppercase accent-text md:text-4xl">
                     {data.pricingSection.title}
                   </h3>
                 )}
 
                 {data.pricingSection.features?.length > 0 && (
-                  <ul className="mt-6 space-y-3 text-[#8C5A5A]/85">
+                  <ul className="mt-6 space-y-3 accent-text/85">
                     {data.pricingSection.features.map(
                       (feature: string, index: number) => (
                         <li key={index} className="flex items-start gap-3">
-                          <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#8C5A5A]" />
+                          <span className="mt-2 h-2 w-2 shrink-0 rounded-full accent-bg" />
                           <span>{feature}</span>
                         </li>
                       )
@@ -114,7 +114,7 @@ export default async function CoursePage({ params }: PageProps) {
                   <div className="mt-8">
                     <Link
                       href={data.pricingSection.buttonLink}
-                      className="inline-block border border-[#8C5A5A] px-6 py-3 text-sm uppercase tracking-wide text-[#8C5A5A] transition hover:bg-[#8C5A5A] hover:text-white"
+                      className="inline-block border border-[#8C5A5A] px-6 py-3 text-sm uppercase tracking-wide accent-text transition hover:accent-bg hover:text-white"
                     >
                       {data.pricingSection.buttonText}
                     </Link>

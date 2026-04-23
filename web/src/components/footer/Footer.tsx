@@ -104,7 +104,7 @@ export default function Footer({
   const hasLegalLinks = privacyUrl || cookieUrl;
 
   return (
-    <footer className="bg-soft text-[#8C5A5A]">
+    <footer className="bg-soft accent-text">
       <div className="border-y border-black/10">
         <div className="mx-auto max-w-7xl px-6 py-14 md:px-8 md:py-20">
           <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr_1.4fr] md:items-start md:gap-10 lg:gap-16">
@@ -124,7 +124,7 @@ export default function Footer({
               </Link>
 
               {footerTagline && (
-                <p className="mt-5 max-w-sm text-sm leading-7 text-[#8C5A5A]/85">
+                <p className="mt-5 max-w-sm text-sm leading-7 accent-text/85">
                   {footerTagline}
                 </p>
               )}
@@ -240,7 +240,7 @@ export default function Footer({
       </div>
 
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 py-6 text-center text-sm md:flex-row md:items-center md:justify-between md:px-8 md:text-left">
-        <div className="text-[#8C5A5A]/80">
+        <div className="accent-text/80">
           © {new Date().getFullYear()} {legalName || brand}
           {vatNumber ? ` · ${t.vat} ${vatNumber}` : ""}
         </div>

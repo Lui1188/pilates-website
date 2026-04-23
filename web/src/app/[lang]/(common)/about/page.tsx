@@ -16,7 +16,7 @@ export default async function AboutPage({ params }: PageProps) {
                 <div className="mx-auto max-w-6xl">
                     {about?.pageTitle && (
                         <Reveal>
-                            <h1 className="mb-10 text-4xl uppercase text-center tracking-tight text-[#8C5A5A] md:mb-30 md:text-6xl">
+                            <h1 className="mb-10 text-4xl uppercase text-center tracking-tight accent-text md:mb-30 md:text-6xl">
                                 {about.pageTitle}
                             </h1>
                         </Reveal>
@@ -46,13 +46,13 @@ export default async function AboutPage({ params }: PageProps) {
                                         <Reveal key={index}>
                                             <div className="max-w-xl">
                                                 {block?.title && (
-                                                    <h2 className="text-2xl uppercase text-[#8C5A5A] md:text-3xl">
+                                                    <h2 className="text-2xl uppercase accent-text md:text-3xl">
                                                         {block.title}
                                                     </h2>
                                                 )}
 
                                                 {block?.text && (
-                                                    <p className="mt-4 whitespace-pre-line text-base leading-8 text-[#8C5A5A]/85">
+                                                    <p className="mt-4 whitespace-pre-line text-base leading-8 accent-text/85">
                                                         {block.text}
                                                     </p>
                                                 )}

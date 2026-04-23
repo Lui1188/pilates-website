@@ -43,13 +43,13 @@ export default function PilatesCoursesSection({
         {(title || description) && (
           <section className="mb-10 md:mb-14">
             {title && (
-              <h2 className="whitespace-pre-line text-2xl uppercase text-[#8C5A5A] md:text-3xl">
+              <h2 className="whitespace-pre-line text-2xl uppercase accent-text md:text-3xl">
                 {title}
               </h2>
             )}
 
             {description && (
-              <p className="mt-4 max-w-3xl text-base leading-8 text-[#8C5A5A]/85 md:text-lg">
+              <p className="mt-4 max-w-3xl text-base leading-8 accent-text/85 md:text-lg">
                 {description}
               </p>
             )}
@@ -59,14 +59,14 @@ export default function PilatesCoursesSection({
         <section className="relative">
           <button
             onClick={() => scrollGallery("left")}
-            className="absolute left-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-[#8C5A5A] shadow-md transition hover:bg-white md:flex"
+            className="absolute left-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 accent-text shadow-md transition hover:bg-white md:flex"
           >
             ‹
           </button>
 
           <button
             onClick={() => scrollGallery("right")}
-            className="absolute right-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-[#8C5A5A] shadow-md transition hover:bg-white md:flex"
+            className="absolute right-[-30px] top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 accent-text shadow-md transition hover:bg-white md:flex"
           >
             ›
           </button>

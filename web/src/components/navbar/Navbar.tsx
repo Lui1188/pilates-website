@@ -11,7 +11,7 @@ type NavbarProps = {
 
 function Hamburger({ open }: { open: boolean }) {
   return (
-    <span className="relative block h-5 w-6 text-[#8C5A5A]">
+    <span className="relative block h-5 w-6 accent-text">
       <span
         className={[
           "absolute left-0 top-0 h-0.5 w-6 rounded-full bg-current transition-transform duration-300",
@@ -68,7 +68,7 @@ export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
       <header className="sticky top-0 z-50 bg-soft">
         <div className="relative mx-auto flex max-w-6xl items-center justify-center px-6 py-3">
 
-          <div className="absolute left-6 flex items-center gap-3 text-sm uppercase text-[#8C5A5A]">
+          <div className="absolute left-6 flex items-center gap-3 text-sm uppercase accent-text">
             <Link href="/it">IT</Link>|<Link href="/en">EN</Link>
           </div>
 
@@ -98,7 +98,7 @@ export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
         id="fullscreen-menu"
         aria-hidden={!open}
         className={[
-          "fixed inset-0 z-[90] flex min-h-screen w-full flex-col justify-center bg-soft text-[#8C5A5A] transition-all duration-300",
+          "fixed inset-0 z-[90] flex min-h-screen w-full flex-col justify-center bg-soft accent-text transition-all duration-300",
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         ].join(" ")}
       >
