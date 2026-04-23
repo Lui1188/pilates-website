@@ -1,7 +1,10 @@
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
-const defaultLocale = "it";
+// const defaultLocale = "it";
 
+// export default function Home() {
+//   redirect(`/${defaultLocale}`);
+// }
 export default function Home() {
-  redirect(`/${defaultLocale}`);
+  return <div>ROOT OK</div>;
 }
