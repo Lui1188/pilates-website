@@ -34,16 +34,24 @@ function Hamburger({ open }: { open: boolean }) {
   );
 }
 
-export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
+export default function Navbar({
+  studioName,
+  logoUrl,
+  lang,
+}: NavbarProps) {
   const [open, setOpen] = useState(false);
+
   const brand = studioName || "Chirolates Studio";
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+      }
     };
 
     window.addEventListener("keydown", onKeyDown);
+
     document.body.style.overflow = open ? "hidden" : "";
 
     return () => {
@@ -53,6 +61,7 @@ export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
   }, [open]);
 
   const close = () => setOpen(false);
+
   const toggleMenu = () => setOpen((prev) => !prev);
 
   const t = {
@@ -60,26 +69,28 @@ export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
     chiropractic: lang === "en" ? "Chiropractic" : "Chiropratica",
     pilates: "Pilates",
     about: lang === "en" ? "About us" : "Chi siamo",
-    contacts: lang === "en" ? "Contacts" : "Contatti",
+    insights: lang === "en" ? "Insights" : "Approfondimenti",
   };
 
   return (
     <>
       <header className="sticky top-0 z-50 bg-soft">
         <div className="relative mx-auto flex max-w-6xl items-center justify-center px-6 py-3">
-
           <div className="absolute left-6 flex items-center gap-3 text-sm uppercase accent-text">
             <Link href="/it">IT</Link>|<Link href="/en">EN</Link>
           </div>
 
-          <Link href={`/${lang}`} onClick={close} className="flex items-center justify-center">
+          <Link
+            href={`/${lang}`}
+            onClick={close}
+            className="flex items-center justify-center"
+          >
             <img
               src={logoUrl || "/logo.svg"}
               alt={brand}
               className="h-20 w-auto md:h-24"
             />
           </Link>
-
         </div>
       </header>
 
@@ -99,7 +110,9 @@ export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
         aria-hidden={!open}
         className={[
           "fixed inset-0 z-[90] flex min-h-screen w-full flex-col justify-center bg-soft accent-text transition-all duration-300",
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+          open
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0",
         ].join(" ")}
       >
         <nav className="flex flex-col items-center justify-center gap-6 px-6 text-center">
@@ -136,11 +149,11 @@ export default function Navbar({ studioName, logoUrl, lang }: NavbarProps) {
           </Link>
 
           <Link
-            href={`/${lang}/contatti`}
+            href={`/${lang}/servizi/chiropratica/approfondimenti`}
             onClick={close}
             className="text-3xl font-light tracking-wide transition hover:opacity-60 md:text-5xl"
           >
-            {t.contacts}
+            {t.insights}
           </Link>
         </nav>
       </div>

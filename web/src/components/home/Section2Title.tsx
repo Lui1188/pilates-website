@@ -24,8 +24,8 @@ export default function Section2Title({ title }: { title: string }) {
         }
     });
 
-    const downX = useTransform(scrollYProgress, [0, 1], ["100%", "-100%"]);
-    const upX = useTransform(scrollYProgress, [1, 0], ["-100%", "100%"]);
+    const downX = useTransform(scrollYProgress, [0, 1], ["70%", "-70%"]);
+    const upX = useTransform(scrollYProgress, [1, 0], ["-70%", "70%"]);
 
     const smoothDownX = useSpring(downX, {
         stiffness: 90,
@@ -41,7 +41,7 @@ export default function Section2Title({ title }: { title: string }) {
         <div ref={ref} className="w-full overflow-hidden">
             <motion.h2
                 style={{ x: direction === "down" ? smoothDownX : smoothUpX }}
-                className="whitespace-nowrap text-[88px] leading-none uppercase tracking-[0.08em] text-[#ead6d6] md:text-[120px] lg:text-[200px]"
+                className="whitespace-nowrap text-[64px] leading-none uppercase tracking-[0.08em] text-[#ead6d6] md:text-[120px] lg:text-[200px]"
             >
                 {title}
             </motion.h2>

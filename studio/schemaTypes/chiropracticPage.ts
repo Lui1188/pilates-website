@@ -186,12 +186,26 @@ export default defineType({
       type: "array",
       of: [alternatingSection],
     }),
+
+    defineField({
+      name: "insightsTitle",
+      title: "Titolo sezione - Approfondimenti",
+      type: "string",
+      initialValue: "Approfondimenti",
+    }),
+    defineField({
+      name: "insightsSections",
+      title: "Sezioni - Approfondimenti",
+      type: "array",
+      of: [alternatingSection],
+    }),
   ],
 
   preview: {
     select: {
-      title: "pageTitle",
+      title: "approachTitle",
       subtitle: "language",
     },
   },
 });
+

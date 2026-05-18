@@ -151,6 +151,15 @@ export const chiropracticPageQuery = `
     text,
     "imageUrl": image.asset->url,
     imageAlt
+  },
+
+  insightsTitle,
+  insightsSections[]{
+    _key,
+    title,
+    text,
+    "imageUrl": image.asset->url,
+    imageAlt
   }
 }
 `;
